@@ -1,0 +1,21 @@
+name: geometric
+channels:
+    - conda-forge
+    - defaults
+dependencies:
+    - python=3.6
+    - pip
+    - numpy
+    - matplotlib
+    - jupyter
+    - pytest
+    - pytest-cov
+    - pytest-mpl
+    - coverage
+    - flake8
+    - pylint
+    - sphinx
+    - sphinx_bootstrap_theme
+    - nbsphinx
+    - numpydoc
+    - twine

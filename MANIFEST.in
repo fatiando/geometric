@@ -1,0 +1,6 @@
+include LICENSE.txt
+include README.rst
+include versioneer.py
+include geometric/_version.py
+recursive-include geometric/tests/data *
+recursive-include geometric/tests/baseline *

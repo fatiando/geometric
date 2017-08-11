@@ -1,0 +1,12 @@
+jupyter
+pytest
+pytest-cov
+pytest-mpl
+coverage
+flake8
+pylint
+sphinx
+sphinx_bootstrap_theme
+nbsphinx
+numpydoc
+twine
