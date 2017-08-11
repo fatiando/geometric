@@ -1,0 +1,12 @@
+*~
+.*.swp
+*.pyc
+*.so
+*.pyd
+build/
+dist/
+.coverage
+.cache
+.ipynb_checkpoints/
+*.egg-info
+MANIFEST
