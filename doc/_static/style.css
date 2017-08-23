@@ -180,8 +180,12 @@ div.figure {
 
 .method {
     /*border-top: 1px solid #d2d2d2;*/
-    margin-top: 50px;
+    margin-top: 30px;
     margin-left: 0px;
+}
+
+.descname {
+	padding-left: 0px;
 }
 
 /* The Parameters etc sections */
@@ -200,7 +204,7 @@ div.figure {
     margin-bottom: 0px;
 }
 
-.row-even {
+.row-odd {
     background-color: #eee;
 }
 

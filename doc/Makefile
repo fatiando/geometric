@@ -3,6 +3,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
+SPHINXAUTOGEN = sphinx-autogen
 BUILDDIR      = _build
 
 # User-friendly check for sphinx-build
@@ -34,7 +35,10 @@ clean:
 	rm -rf tutorial/
 	rm -rf .ipynb_checkpoints
 
-html:
+autogen:
+	$(SPHINXAUTOGEN) -i -t _templates -o api/ _api_generate.rst
+
+html: autogen
 	@echo
 	@echo "Building HTML files."
 	@echo

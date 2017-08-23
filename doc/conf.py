@@ -43,7 +43,7 @@ else:
 
 # Produce pages for each class and function
 autosummary_generate = True
-autodoc_default_flags = ['members', 'inherited-members']
+autodoc_default_flags = []
 
 numpydoc_class_members_toctree = False
 
