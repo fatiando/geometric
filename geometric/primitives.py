@@ -1,67 +1,19 @@
-# pylint: skip-file
 """
 Geometric primitives
 """
+import numpy as np
+
+from .base import WithPhysicalProperties
 
 
-class GeometricObject():
+class Sphere(WithPhysicalProperties):
     """
-    Something.
-
-    Parameters
-    ----------
-    bounds : list
-        Boundaries
-    other : array
-        Something else
-
-    Attributes
-    ----------
-    density : float
-        A physical property.
-
+    A sphere.
     """
 
-    def some_method(self, bla):
-        """
-        Some documentation
-
-        Parameters
-        ----------
-        bla : str
-            Some parameter
-
-        """
-        return bla*2
-
-    def other_method(self, value):
-        """
-        Some other documentation
-
-        Parameters
-        ----------
-        value : str
-            Some parameter
-
-        """
-        return value/2
-
-
-def some_function(value):
-    """
-    A sample function.
-
-    Parameters
-    ----------
-    value : array
-        A value.
-
-
-    Examples
-    --------
-
-    >>> some_function(30)
-    60
-
-    """
-    return value*2
+    def __init__(self, center, radius, **properties):
+        super().__init__(**properties)
+        self.center = center
+        "Coordinates of the center of the sphere (EW, NS, vertical) in meters"
+        self.radius = radius
+        "The radius of the sphere in meters"

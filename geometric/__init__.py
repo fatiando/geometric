@@ -2,6 +2,7 @@
 Create, manipulate, and visualize geometric objects with physical properties
 """
 from ._version import get_versions
+from .primitives import Sphere
 
 
 # Set the version number using versioneer

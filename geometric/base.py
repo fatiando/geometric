@@ -4,7 +4,7 @@ Geometric primitives like prisms, spheres, etc.
 import numpy as np
 
 
-class PhysicalProperties():
+class WithPhysicalProperties():
     """
     Base class for all geometric objects that have physical properties.
     """
@@ -24,6 +24,15 @@ class PhysicalProperties():
         for name, value in properties.items():
             setattr(self, name, value)
         return self
+
+    @property
+    def volume(self):
+        """
+        The volume in m^3
+        Must be implemented by the child class in order to have access to the
+        'mass' property.
+        """
+        return self._density
 
     @property
     def density(self):
