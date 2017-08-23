@@ -1,8 +1,6 @@
 """
 Geometric primitives
 """
-import numpy as np
-
 from .base import WithPhysicalProperties
 
 
