@@ -1,0 +1,127 @@
+language: generic
+
+sudo: false
+
+branches:
+    only:
+        - master
+        # Regex to build tagged commits with version numbers
+        - /\d+\.\d+(\.\d+)?(\S*)?$/
+
+env:
+    global:
+        # CODACY_PROJECT_TOKEN to upload coverage to codacy
+        - secure: "QHvEt9I/1CkqeEdjijVVYQzwvqXoSGfBpha18/p16nyZvHTrlOouS+olqME/Hk2Fq/+1igJApCxh9QBqli/nJtWg/X68mfnbISX5Uwcsst1qfiQIvEka3FvnRSZFS4LbDwIBicJ28viPsYtngLlgM2TFev6nBL5a8vR21LeaZ5KYsvtjcDHbZkAHG73ZWdFrzUIxt33kJW7g2kuRmEA9/RzCrOtm9iu3SH8h4/X/xVYk8ZYJ7awBjOPU9jU718GInhv2zXVk6BKRPRSj5OVC758dYYppDkGsHoHgwvr8Fm2yREJojwRhTwav35kY3GNxHHnfH5s0i7z7DnDUP51hGbIqXWMZID5d6UrdxqECdcoX74Y4S77n68VAcKINdvRmsbKZw12jjXsxR66ILKYFFwcFN1nnw2EaRh11XD/ayYIdIvUEUZcJyy6foV2iqHUVLVsODWdQKGU/qnjHGzof+nBs1HYGCAUung6ucfDzjpvqqZh6gw2ZLeTSp1OpoJZMiP8+07Cu8Gbb0wIc3MOTyWYU1n/bLSBRWvmadYEINxl4tfPxh8TewE93+ERQ0xDtdsIkqPdT8ccgW5ig7XRVOPZIMCQxaJqKiGLDpJ3qTTlbh5pNgETxdypqKIbRzXTwHuGx8hmDWP3s4HSLKQGewPCoK0YrQt36NVMSdKaptag="
+        # Github Token for pushing the built docs (GH_TOKEN)
+        - secure: "IYSSRlVmuQCa5kN+s72X0NLfwnVCPnQY/zBD8f9QVyfa3oyyv0hNMieA3E3GKkXoUEkaTpeavDIb6utDetFwRLTJRFln5yMscuuSP3qw9XrKSvmqtknC2LZN8rooBsZOKF9NEBVpsZz5P9shhavij3o5EjKAOFAe0WivxyqHWmHKxqAsHF7AIvv14/OY7M+HVgIVRueqJE1IAebZ46F8Jb0TtBAlkyg0ZWkTS6YGZMz6mhZPAQ8fvu1w8QWrAyub24lWjR9qt6smYWos1HQ5nuNEendaxs7Tv50iHK4ZxI4NQ42AsWW4A4sqtalGDPYogtRnKBv+qVu7/izoLV/TQG3FXyiFC9UY18FctvnSobgESzVQlW5PEjqnFu1Ia0a2H1LO5P4TjISBVQaF6muVNACVHYVeNf2WwOCBXOKRN5VvSywkekbYJTJFvcRO3G73Z8TxUcLZEFesnuNmzVYZUO24PwBtQMyBVaLMiuecpY/eYU1rN3EWqeEuXyxB4lkRuH/GRqa9CtUM71yvxoR5yqoyDGIWHO+jAEhPYfyCHfR8+bKhO0ZFAXZLMdPmXynczZQmeNTa0YIZlMj9xKDwjrMS9lXO+TjVfnmBE+6HRqMvbepugRB3+EU2v5Ey8EwckEj8iGC9/EfcwKONF3T41NQx4oexEEUoLNCvWXuFDi8="
+        - COVERAGE=false
+        - BUILD_DOCS=false
+        - DEPLOY_DOCS=false
+        - DEPLOY_PYPI=false
+
+matrix:
+    # Build under the following configurations
+    include:
+        - os: linux
+          env:
+              - PYTHON=3.5
+        - os: linux
+          env:
+              - PYTHON=3.6
+              - COVERAGE=true
+              - BUILD_DOCS=true
+              - DEPLOY_DOCS=true
+              - DEPLOY_PYPI=true
+        - os: osx
+          env:
+              - PYTHON=3.5
+        - os: osx
+          env:
+              - PYTHON=3.6
+              - COVERAGE=true
+              - BUILD_DOCS=true
+
+before_install:
+    # Get Miniconda from Continuum
+    # Need to source the script to set the PATH variable in this environment
+    # (not the scripts environment)
+    - source ci/install-miniconda.sh
+    - conda update --yes conda
+    # Install dependencies
+    - conda install --yes python=$PYTHON pip -c conda-forge
+    # Need the dev channel to get development builds of GMT 6
+    - conda install --yes --file requirements.txt -c conda-forge
+    - conda install --yes --file requirements-dev.txt -c conda-forge
+    - if [ "$COVERAGE" == "true" ]; then
+        pip install codecov codacy-coverage codeclimate-test-reporter;
+      fi
+    # Show installed pkg information for postmortem diagnostic
+    - conda list
+
+install:
+    # Package and install
+    - python setup.py bdist_wheel
+    - pip install dist/*
+
+script:
+    # Check code for PEP8 style and lint for code quality
+    - make pep8
+    - make lint
+    # Run the test suite
+    - if [ "$COVERAGE" == "true" ]; then
+        make coverage;
+      else
+        make test;
+      fi
+    # Build the documentation
+    - if [ "$BUILD_DOCS" == "true" ]; then
+        make -C doc all;
+      fi
+
+after_success:
+    - if [ "$COVERAGE" == "true" ]; then
+        echo "Uploading coverage to Codecov";
+        codecov -e PYTHON;
+        coverage xml;
+        echo "Uploading coverage to Codacy";
+        python-codacy-coverage -r coverage.xml;
+        echo "Uploading coverage to Code Climate";
+        codeclimate-test-reporter;
+      fi
+
+deploy:
+    # Push the built docs to Github pages
+    - provider: script
+      script: ci/deploy-docs.sh
+      skip_cleanup: true
+      on:
+          branch: master
+          condition: '$DEPLOY_DOCS == "true"'
+    # Push docs when building tags as well
+    - provider: script
+      script: ci/deploy-docs.sh
+      skip_cleanup: true
+      on:
+          tags: true
+          condition: '$DEPLOY_DOCS == "true"'
+    # Make a release on PyPI
+    - provider: pypi
+      user: Leonardo.Uieda
+      password:
+          secure: "Y/RPW0X6NLaKy8A5Q3LeZU9q39co3dHjPQMx8wL7C4dHJB8ZKGCrZ4Ldx3jxC9aegmtfZ5cKplrk31uSuyCfF1t8ol5XYYsB2+TMCvbgoGZTbLBheJ2MkSs6r1loA7etqiTI9fYYo+hUnkCHw6rZcvoa3mchalgWPne7vJ0bPRSx4eQ6vQr9L17A3ZXlKk1xIzA6VdgBc3r+HU2fKb0+74IKzk/XwgAb5um7thPe6BpYuYTyo8WAAG6O+fbQyAfiXyqyREnThSwM0VCKSWnSxb8b+gfKB0lImGb9YjexJqJWD1trx/W++S1dRoxXD7/xbMHiEBzsx1exAyMaIrUEhX0DWayo/N95JKjFabKwxJjo+q6BzsLtRyAIptx0QyR+3IBf7nWvASPn1MiZuvyGTUir3C3NV2LIzFf5mBgUngQfRWxA3UsqpZZXiABkk7lub5FYrXMxKTYoi3LpvP6VSLMNuofWeruEQ8hxo4d0JBWYvNnUxB3JHFx36OLFufals67vGgrQpOW1FIl4UpUP0BJboiADHp5jsrqyVEJekf4cvfQUVO5jQ/wZleQfe2aiwsd5PjpvMTUB0cHnPGDspObsvWdkimXY7QOQFzz1jDVLIAGxtN1rZtWEgTI/LfH6cUSws1YqVguKH7gT9m80RjnJS4ZQ1TRJyg8wE0XjmEA="
+      distributions: sdist bdist_wheel
+      upload_docs: no
+      on:
+        repo: fatiando/geometric
+        condition: '$DEPLOY_PYPI == "true"'
+        tags: true
+
+notifications:
+    email: false
+    webhooks:
+        # Integration for Gitter
+        urls:
+            - https://webhooks.gitter.im/e/26d780ac4d6c224a9b8d
+        on_success: change  # options: [always|never|change] default: always
+        on_failure: always  # options: [always|never|change] default: always
+        on_start: never     # options: [always|never|change] default: always

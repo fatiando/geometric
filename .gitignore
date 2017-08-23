@@ -10,6 +10,9 @@ dist/
 doc/_build
 doc/modules
 doc/api
+doc/gallery
+doc/tutorial
+doc/backreferences
 .ipynb_checkpoints
 *.egg-info
 .env

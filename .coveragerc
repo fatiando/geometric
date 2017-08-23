@@ -1,0 +1,5 @@
+[run]
+omit =
+    */tests/*
+    */_version.py
+    *geometric/__init__.py

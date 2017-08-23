@@ -1,0 +1,43 @@
+# Continuous integration for Windows using http://appveyor.com/
+
+# Not a .NET project, we build ci-helpers in the install step instead
+build: false
+
+# Only build pushes to the master branch.
+branches:
+    only:
+        - master
+
+environment:
+    matrix:
+        - PYTHON_VERSION: "3.5"
+          MINICONDA: C:\Miniconda35
+
+        - PYTHON_VERSION: "3.5"
+          MINICONDA: C:\Miniconda35-x64
+
+        - PYTHON_VERSION: "3.6"
+          MINICONDA: C:\Miniconda36
+
+        - PYTHON_VERSION: "3.6"
+          MINICONDA: C:\Miniconda36-x64
+
+init:
+    - "ECHO %PYTHON_VERSION% %MINICONDA%"
+
+install:
+    - cmd: set "PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
+    - cmd: conda config --set always_yes yes --set changeps1 no
+    - cmd: conda update -q conda
+    - cmd: conda info -a
+    - cmd: conda create -q -n testenv python="%PYTHON_VERSION%"
+    - cmd: activate testenv
+    - cmd: conda install --file "requirements.txt" -c conda-forge
+    - cmd: conda install --file "requirements-dev.txt" -c conda-forge
+    - cmd: python setup.py sdist --formats=zip
+    - ps: ls dist
+    - ps: pip install --no-deps (Get-ChildItem dist\*.zip)
+
+
+test_script:
+    - ps: mkdir -p tmp; cd tmp; python -c "import geometric; print('Installed:', geometric.__file__, 'and', geometric.__version__); geometric.test()"

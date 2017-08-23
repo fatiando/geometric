@@ -17,8 +17,8 @@ ratings:
 
 exclude_paths:
     - "versioneer.py"
-    - "gmt/_version.py"
+    - "**/_version.py"
     - "doc/**/*"
     - "ci/*"
-    - "gmt/tests/baseline/*"
-    - "gmt/tests/data/*"
+    - "**/tests/baseline/*"
+    - "**/tests/data/*"

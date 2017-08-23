@@ -5,8 +5,8 @@ Geometric
 
 Part of `Fatiando a Terra <http://www.fatiando.org>`__.
 
-`Documentation <>`_ |
-`Install <>`_ |
+`Documentation <http://www.fatiando.org/geometric>`_ |
+`Install <http://www.fatiando.org/geometric/latest/install.html>`_ |
 `Contact <https://gitter.im/fatiando/fatiando>`_
 
 .. image:: http://img.shields.io/pypi/v/geometric.svg?style=flat-square
@@ -15,6 +15,9 @@ Part of `Fatiando a Terra <http://www.fatiando.org>`__.
 .. image:: http://img.shields.io/travis/fatiando/geometric/master.svg?style=flat-square&label=linux|osx
     :alt: Travis CI build status
     :target: https://travis-ci.org/fatiando/geometric
+.. image:: https://img.shields.io/appveyor/ci/leouieda/geometric/master.svg?style=flat-square&label=windows
+    :alt: AppVeyor build status
+    :target: https://ci.appveyor.com/project/leouieda/geometric
 .. image:: https://img.shields.io/codecov/c/github/fatiando/geometric/master.svg?style=flat-square
     :alt: Test coverage status
     :target: https://codecov.io/gh/fatiando/geometric
@@ -27,9 +30,9 @@ Part of `Fatiando a Terra <http://www.fatiando.org>`__.
 .. image:: https://img.shields.io/pypi/pyversions/geometric.svg?style=flat-square
     :alt: Compatible Python versions.
     :target: https://pypi.python.org/pypi/geometric
-.. image:: https://img.shields.io/gitter/room/fatiando/geometric.svg?style=flat-square
+.. image:: https://img.shields.io/gitter/room/fatiando/fatiandog.svg?style=flat-square
     :alt: Chat room on Gitter
-    :target: https://gitter.im/fatiando/geometric
+    :target: https://gitter.im/fatiando/fatiando
 
 
 Disclaimer
@@ -56,6 +59,11 @@ Project goals
 
 Contributing
 ------------
+
+See our `Contributing Guide <https://github.com/fatiando/contribute>`__ for
+information on how to send feedback, our code standard, how to setup your
+environment, submitting pull requests, and more.
+
 
 Imposter syndrome disclaimer
 ++++++++++++++++++++++++++++

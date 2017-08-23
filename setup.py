@@ -9,16 +9,13 @@ import versioneer
 
 
 with open("README.rst") as f:
-    readme = ''.join(f.readlines())
+    README = ''.join(f.readlines())
 
-with open("requirements.txt") as f:
-    requirements = [line.strip() for line in f.readlines()]
-
-setup_args = dict(
+SETUP_ARGS = dict(
     name='geometric',
     fullname='geometric',
     description='Geometric objects with physical properties',
-    long_description=readme,
+    long_description=README,
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
     author='Leonardo Uieda',
@@ -38,7 +35,10 @@ setup_args = dict(
     ],
     keywords='',
     platforms='Any',
-    install_requires=requirements,
+    install_requires=[
+        'numpy',
+        'matplotlib'
+    ],
     scripts=[],
     packages=find_packages(exclude=['doc', 'ci']),
     package_data={
@@ -47,4 +47,4 @@ setup_args = dict(
 )
 
 if __name__ == '__main__':
-    setup(**setup_args)
+    setup(**SETUP_ARGS)
