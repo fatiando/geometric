@@ -4,6 +4,7 @@ TESTDIR=tmp-test-dir-with-unique-name
 PYTEST_ARGS=--doctest-modules -v --pyargs
 PYTEST_COV_ARGS=--cov-config=../.coveragerc --cov-report=term-missing
 PACKAGE=geometric
+CHECK_FILES=$(PACKAGE) setup.py gallery tutorial
 
 help:
 	@echo "Commands:"
@@ -34,10 +35,10 @@ coverage:
 	rm -r $(TESTDIR)
 
 pep8:
-	flake8 $(PACKAGE) setup.py
+	flake8 $(CHECK_FILES)
 
 lint:
-	pylint $(PACKAGE) setup.py
+	pylint $(CHECK_FILES)
 
 check: pep8 lint
 

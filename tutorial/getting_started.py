@@ -15,8 +15,7 @@ import numpy as np
 ###############################################################################
 # Create some random data.
 
-np.random.seed(42)
-x = np.random.uniform(0, 100, 100)
+x = np.linspace(0, 100, 100)
 y = np.sin(x) + 10
 print(x, y)
 
