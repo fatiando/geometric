@@ -1,0 +1,12 @@
+geometric\.test
+===============
+
+.. currentmodule:: geometric
+
+.. autofunction:: test
+
+.. include:: ../backreferences/geometric.test.examples
+
+.. raw:: html
+
+      <div style='clear:both'></div>

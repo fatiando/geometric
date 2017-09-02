@@ -1,0 +1,33 @@
+geometric
+---------
+
+.. automodule:: geometric
+
+.. currentmodule:: geometric
+
+
+
+.. rubric:: Functions
+
+.. autosummary::
+  :toctree: ./
+
+  test
+
+
+
+
+
+
+.. rubric:: Classes
+
+.. autosummary::
+  :toctree: ./
+
+  Sphere
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+geometric\.Sphere
+=================
+
+.. currentmodule:: geometric
+
+.. autoclass:: Sphere
+
+    
+    
+
+    .. rubric:: Methods Documentation
+
+    
+    
+    
+    
+    .. automethod:: set_properties
+    
+    
+
+    
+    
+
+.. include:: ../backreferences/geometric.Sphere.examples
+
+.. raw:: html
+
+     <div style='clear:both'></div>

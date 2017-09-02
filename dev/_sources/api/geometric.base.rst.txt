@@ -1,0 +1,25 @@
+geometric\.base
+---------------
+
+.. automodule:: geometric.base
+
+.. currentmodule:: geometric.base
+
+
+
+
+
+
+
+.. rubric:: Classes
+
+.. autosummary::
+  :toctree: ./
+
+  WithPhysicalProperties
+
+
+
+
+
+

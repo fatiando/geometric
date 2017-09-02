@@ -1,0 +1,215 @@
+/* To stick the footer to the bottom of the page */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    color: #222;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    font-size: 12pt;
+    /* Margin bottom by footer height with a little room to accomodate small
+     * screens */
+    margin-bottom: 200px;
+}
+
+a {
+    color: #008CBA;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 22pt;
+    margin-top: 50px;
+}
+
+blockquote {
+    font-size: 12pt;
+    color: #6F6F6F;
+}
+
+.alert {
+    font-size: 12pt;
+}
+
+.alert a {
+    color: #FFF;
+    text-decoration: underline;
+}
+
+.page-container {
+    margin-top: 35px;
+}
+
+.footer {
+    color: #6F6F6F;
+    margin-top: 50px;
+    padding-bottom: 30px;
+    font-size: 11pt;
+    /* To stick the footer to the bottom of the page */
+    position: absolute;
+    bottom: 0;
+    /* Set the fixed height of the footer here */
+    min-height: 110px;
+}
+
+.jumbotron p {
+    font-size: 16pt;
+    color: #333;
+}
+
+.highlight pre {
+    font-size: 11pt;
+    color: #333;
+}
+
+
+/* Gallery images */
+/****************************************************************************/
+div.figure p.caption {
+    text-align: center;
+}
+div.figure {
+    padding: 0px;
+    margin: 0px;
+}
+.sphx-glr-thumbcontainer .figure {
+    padding: 0px;
+    margin: 0px;
+    width: 200px;
+}
+
+.sphx-glr-thumbcontainer img {
+    width: 200px;
+    max-height: 200px;
+}
+/****************************************************************************/
+
+
+/* Navbar */
+/****************************************************************************/
+.menu {
+    border: none;
+    margin-bottom: 0px;
+    background-color: #172c4d;
+    color: #ffffff;
+    position: relative;
+    min-height: 50px;
+    display: block;
+    font-size: 16px;
+    /*box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);*/
+    padding: 0px;
+}
+
+.menu a {
+    color: #ffffff;
+}
+
+.menu-brand {
+    font-size: 16pt;
+    padding-top: 13px;
+}
+
+.menu-brand > a > img {
+    padding-right: 10px;
+}
+
+.menu-brand > a:hover {
+    text-decoration: none;
+}
+
+.menu-version {
+    color: #777777;
+    font-size: 11pt;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.menu-list {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 40px;
+}
+
+.menu-list > ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-list > ul > li {
+    display: inline;
+    padding-right: 12px;
+    padding-left: 12px;
+}
+
+.menu-search {
+}
+
+.dev-version-warning {
+    font-size: 11pt;
+    margin: 0px;
+    border-radius: 0px;
+    padding: 5px;
+    padding-right: 35px;
+}
+/****************************************************************************/
+
+
+/* API Reference */
+/****************************************************************************/
+.section dd {
+    margin-left: 40px;
+    margin-top: 15px;
+}
+
+.function {
+    border: none;
+    margin-top: 20px;
+}
+
+.class {
+    border: none;
+    margin-top: 20px;
+}
+
+.method {
+    /*border-top: 1px solid #d2d2d2;*/
+    margin-top: 30px;
+    margin-left: 0px;
+}
+
+.descname {
+	padding-left: 0px;
+}
+
+/* The Parameters etc sections */
+.table > tbody > tr > th {
+    padding-left: 0px;
+}
+
+.field-body blockquote {
+    border: none;
+    color: #222;
+    padding-left: 40px;
+    margin-bottom: 0px;
+}
+
+.field-list {
+    margin-bottom: 0px;
+}
+
+.row-odd {
+    background-color: #eee;
+}
+
+.table > tbody > tr > td {
+    border-top: 1px solid #d2d2d2;
+    border-bottom: 1px solid #d2d2d2;
+}
+/****************************************************************************/
